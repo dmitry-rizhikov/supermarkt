@@ -1,11 +1,11 @@
 import type { ProductInfo } from '~~/types/ProductInfo'
 
-interface Repository {
+interface ProductRepository {
   getProductNames: () => Promise<string[]>
   getProductInfo: (product: string) => Promise<ProductInfo>
 }
 
-export class RepositoryImpl implements Repository {
+export class ProductRepositoryImpl implements ProductRepository {
   public async getProductNames(): Promise<string[]> {
     return await useStorage('supermarket').getKeys()
   }
