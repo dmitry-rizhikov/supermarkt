@@ -11,7 +11,7 @@ interface ProductController {
 }
 
 export class ProductControllerImpl implements ProductController {
-  public countProducts(products: string[]): ProductAmounts {
+  countProducts(products: string[]): ProductAmounts {
     const result = {} as ProductAmounts
 
     for (const product of products) {
@@ -20,11 +20,11 @@ export class ProductControllerImpl implements ProductController {
       }
       result[product] += 1
     }
-    console.log('countProducts', JSON.stringify(result, null, 2))
+    console.debug('countProducts', JSON.stringify(result, null, 2))
     return result
   }
 
-  public async calculateTotals(
+  async calculateTotals(
     productAmounts: ProductAmounts,
   ): Promise<ProductPrices> {
     const result = {} as ProductPrices
@@ -43,7 +43,7 @@ export class ProductControllerImpl implements ProductController {
       }
     }
 
-    console.log('calculateTotals', JSON.stringify(result, null, 2))
+    console.debug('calculateTotals', JSON.stringify(result, null, 2))
     return result
   }
 
@@ -52,7 +52,7 @@ export class ProductControllerImpl implements ProductController {
     const names = scanString.match(
       new RegExp(`(${keys.join('|')})`, 'gi'),
     ) as string[]
-    console.log('getProductNames', JSON.stringify(names, null, 2))
+    console.debug('getProductNames', JSON.stringify(names, null, 2))
     return names
   }
 

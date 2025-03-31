@@ -6,11 +6,11 @@ interface ProductRepository {
 }
 
 export class ProductRepositoryImpl implements ProductRepository {
-  public async getProductNames(): Promise<string[]> {
+  async getProductNames(): Promise<string[]> {
     return await useStorage('supermarket').getKeys()
   }
 
-  public async getProductInfo(product: string): Promise<ProductInfo> {
+  async getProductInfo(product: string): Promise<ProductInfo> {
     return await useStorage('supermarket').getItem<ProductInfo>(product)
   }
 }

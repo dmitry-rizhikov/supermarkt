@@ -1,4 +1,4 @@
-import { ProductControllerImpl } from '../../controller/ProductController'
+import { ProductControllerImpl } from '~~/controller/ProductController'
 
 export default defineEventHandler(async (event) => {
   const { scan } = getQuery<Record<string, string>>(event)
