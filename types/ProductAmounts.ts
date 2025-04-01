@@ -1,4 +1,3 @@
 export type ProductAmounts = {
-  product: string
-  amount: number
+  [product: string]: number
 }

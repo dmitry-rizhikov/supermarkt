@@ -15,7 +15,7 @@ import { afterAll } from 'vitest'
 
 // This context is used to keep track of the Nitro instance, the server
 // running in the background and some other useful information and utilities.
-type Context = {
+export type NitroContext = {
   outDir: string
   nitro?: Nitro
   listener?: Listener
@@ -30,7 +30,7 @@ type Context = {
 export const setupTests = async (
   options: { nitroConfig?: NitroConfig } = {},
 ) => {
-  const ctx: Context = {
+  const ctx: NitroContext = {
     outDir: resolve('.output'),
     fetch: (path, options) =>
       // biome-ignore lint/style/noNonNullAssertion: <explanation>

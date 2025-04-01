@@ -1,18 +1,38 @@
 [
   {
     "key": "supermarket:apple",
-    "value": { "price": 30, "offerPrice": 45, "offerAmount": 2 }
+    "value": {
+      "product": "apple",
+      "price": 30,
+      "offerPrice": 45,
+      "offerAmount": 2
+    }
   },
   {
     "key": "supermarket:banana",
-    "value": { "price": 50, "offerPrice": 130, "offerAmount": 3 }
+    "value": {
+      "product": "banana",
+      "price": 50,
+      "offerPrice": 130,
+      "offerAmount": 3
+    }
   },
   {
     "key": "supermarket:peach",
-    "value": { "price": 60, "offerPrice": null, "offerAmount": null }
+    "value": {
+      "product": "peach",
+      "price": 60,
+      "offerPrice": null,
+      "offerAmount": null
+    }
   },
   {
     "key": "supermarket:kiwi",
-    "value": { "price": 20, "offerPrice": null, "offerAmount": null }
+    "value": {
+      "product": "kiwi",
+      "price": 20,
+      "offerPrice": null,
+      "offerAmount": null
+    }
   }
 ]

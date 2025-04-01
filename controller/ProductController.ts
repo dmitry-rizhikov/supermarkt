@@ -11,6 +11,8 @@ interface ProductController {
 }
 
 export class ProductControllerImpl implements ProductController {
+  private readonly productRepository = new ProductRepositoryImpl()
+
   countProducts(products: string[]): ProductAmounts {
     const result = {} as ProductAmounts
 
@@ -20,7 +22,6 @@ export class ProductControllerImpl implements ProductController {
       }
       result[product] += 1
     }
-    console.debug('countProducts', JSON.stringify(result, null, 2))
     return result
   }
 
@@ -29,34 +30,43 @@ export class ProductControllerImpl implements ProductController {
   ): Promise<ProductPrices> {
     const result = {} as ProductPrices
 
-    for (const product of Object.keys(productAmounts)) {
-      const productInfo =
-        await useStorage('supermarket').getItem<ProductInfo>(product)
-      if (productInfo.offerAmount) {
-        result[product] =
-          Math.floor(productAmounts[product] / productInfo.offerAmount) *
-            productInfo.offerPrice +
-          (productAmounts[product] % productInfo.offerAmount) *
-            productInfo.price
-      } else {
-        result[product] = productAmounts[product] * productInfo.price
-      }
-    }
+    for (const [product, amount] of Object.entries(productAmounts)) {
+      const productInfo = await this.productRepository.getProductInfo(product)
+      let totalPrice = 0
 
-    console.debug('calculateTotals', JSON.stringify(result, null, 2))
+      if (productInfo.offerPrice && productInfo.offerAmount) {
+        totalPrice =
+          Math.floor(amount / productInfo.offerAmount) *
+            productInfo.offerPrice +
+          (amount % productInfo.offerAmount) * productInfo.price
+      } else {
+        totalPrice = amount * productInfo.price
+      }
+      result[product] = totalPrice
+    }
     return result
   }
 
   async getProductNames(scanString: string): Promise<string[]> {
-    const keys = await new ProductRepositoryImpl().getProductNames()
-    const names = scanString.match(
-      new RegExp(`(${keys.join('|')})`, 'gi'),
-    ) as string[]
-    console.debug('getProductNames', JSON.stringify(names, null, 2))
+    const keys = await this.productRepository.getProductNames()
+    if (!keys || !keys.length) {
+      return []
+    }
+    const pattern = `${keys.join('|')}`
+
+    const names = scanString.match(new RegExp(pattern, 'gi')) as string[]
     return names
   }
 
   printInvoice(productPrices: ProductPrices): string {
-    return JSON.stringify(productPrices, null, 2)
+    const array = []
+    let totalPrice = 0
+    for (const [product, total] of Object.entries(productPrices)) {
+      totalPrice += total
+      array.push(`${product}: ${total}`)
+    }
+    array.push('===============')
+    array.push(`Total price: ${totalPrice}`)
+    return array.join('\n')
   }
 }
