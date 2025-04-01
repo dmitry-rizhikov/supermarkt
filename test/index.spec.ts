@@ -1,5 +1,5 @@
-import { beforeAll, describe, expect, it, vi } from 'vitest'
-import { type NitroContext, setupTests } from '~~/test/tests'
+import {beforeAll, describe, expect, it} from 'vitest'
+import {type NitroContext, setupTests} from '~~/test/tests'
 
 describe('index', async () => {
   let nitroCtx: NitroContext
@@ -33,7 +33,7 @@ describe('index', async () => {
     )
     const responseText = await response.text()
     expect(responseText).toEqual(
-      'banana: 130\napple: 45\nkiwi: 20\n===============\nTotal price: 195',
+      'banana: 130<br/>\r\napple: 45<br/>\r\nkiwi: 20<br/>\r\n===============<br/>\r\nTotal price: 195',
     )
   })
 })

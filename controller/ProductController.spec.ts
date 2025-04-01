@@ -77,7 +77,10 @@ describe('ProductController', async () => {
   })
 
   it.each([
-    [{ apple: 12 }, 'apple: 12<br/>\r\n===============<br/>\r\nTotal price: 12'],
+    [
+      { apple: 12 },
+      'apple: 12<br/>\r\n===============<br/>\r\nTotal price: 12',
+    ],
     [
       { apple: 1, kiwi: 2 },
       'apple: 1<br/>\r\nkiwi: 2<br/>\r\n===============<br/>\r\nTotal price: 3',
