@@ -77,18 +77,18 @@ describe('ProductController', async () => {
   })
 
   it.each([
-    [{ apple: 12 }, 'apple: 12\n===============\nTotal price: 12'],
+    [{ apple: 12 }, 'apple: 12<br/>\r\n===============<br/>\r\nTotal price: 12'],
     [
       { apple: 1, kiwi: 2 },
-      'apple: 1\nkiwi: 2\n===============\nTotal price: 3',
+      'apple: 1<br/>\r\nkiwi: 2<br/>\r\n===============<br/>\r\nTotal price: 3',
     ],
     [
       { apple: 123, kiwi: 987 },
-      'apple: 123\nkiwi: 987\n===============\nTotal price: 1110',
+      'apple: 123<br/>\r\nkiwi: 987<br/>\r\n===============<br/>\r\nTotal price: 1110',
     ],
     [
       { apple: 2, kiwi: 3, peach: 4, banana: 99, brot: 654 },
-      'apple: 2\nkiwi: 3\npeach: 4\nbanana: 99\nbrot: 654\n===============\nTotal price: 762',
+      'apple: 2<br/>\r\nkiwi: 3<br/>\r\npeach: 4<br/>\r\nbanana: 99<br/>\r\nbrot: 654<br/>\r\n===============<br/>\r\nTotal price: 762',
     ],
   ])(
     'should print the totals as expected for %o',

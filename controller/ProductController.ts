@@ -65,6 +65,6 @@ export class ProductControllerImpl implements ProductController {
     }
     array.push('===============')
     array.push(`Total price: ${totalPrice}`)
-    return array.join('\n')
+    return array.join('<br/>\r\n')
   }
 }
