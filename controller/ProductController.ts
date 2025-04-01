@@ -1,6 +1,5 @@
 import { ProductRepositoryImpl } from '~~/repository/ProductRepository'
 import type { ProductAmounts } from '~~/types/ProductAmounts'
-import type { ProductInfo } from '~~/types/ProductInfo'
 import type { ProductPrices } from '~~/types/ProductPrices'
 
 interface ProductController {
@@ -54,8 +53,7 @@ export class ProductControllerImpl implements ProductController {
     }
     const pattern = `${keys.join('|')}`
 
-    const names = scanString.match(new RegExp(pattern, 'gi')) as string[]
-    return names
+    return scanString.match(new RegExp(pattern, 'gi')) as string[]
   }
 
   printInvoice(productPrices: ProductPrices): string {
